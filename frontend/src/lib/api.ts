@@ -1,4 +1,10 @@
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+export const API_HOST_URL = import.meta.env.VITE_API_URL;
+
+if (!API_HOST_URL) {
+  throw new Error("VITE_API_URL is not set");
+}
+
+const API_BASE_URL = `${API_HOST_URL}/api/v1`;
 import { supabase } from "@/integrations/supabase/client";
 
 export const apiClient = {

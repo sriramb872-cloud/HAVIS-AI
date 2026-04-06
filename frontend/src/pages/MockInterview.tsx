@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { aiApi } from "@/lib/api";
+import { aiApi, API_HOST_URL } from "@/lib/api";
 import { toast } from "sonner";
 import { Video, Mic, MicOff, Loader2, Bot, PlayCircle, Star, AlertCircle, StopCircle, XCircle } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -596,7 +596,7 @@ export default function MockInterview() {
                         // Prioritize local blob URL first (avoids 416 from 0-byte backend files),
                         // then fall back to the persisted backend URL (e.g. when loading from history).
                         const backendUrl = reviewData.video_url
-                          ? `http://localhost:8000${reviewData.video_url}`
+                          ? `${API_HOST_URL}${reviewData.video_url}`
                           : null;
                         const videoSrc = localVideoUrl || backendUrl;
                         console.log("VIDEO URL:", videoSrc, "| local:", !!localVideoUrl, "| backend:", backendUrl);
