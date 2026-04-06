@@ -55,12 +55,7 @@ app = FastAPI(
 # Standard Middlewares
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8080",
-        "http://localhost:8081",
-        "http://127.0.0.1:8080",
-        "http://127.0.0.1:8081"
-    ],
+    allow_origins=[str(origin).rstrip("/") for origin in settings.BACKEND_CORS_ORIGINS],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -130,10 +125,20 @@ class MediaStaticFiles(StaticFiles):
     async def get_response(self, path: str, scope):
         try:
             response = await super().get_response(path, scope)
-            # Prevent Opaque Response Blocking (ORB) on modern browsers
+            # Prevents Opaque Response Blocking (ORB) on modern browsers
             response.headers["Cross-Origin-Resource-Policy"] = "cross-origin"
+            
             # Explicit CORS for static assets as middleware might skip sub-mounted apps
-            response.headers["Access-Control-Allow-Origin"] = "http://localhost:8080"
+            origin = scope.get("headers", {}).get(b"origin", b"").decode("utf-8")
+            allowed_origins = [str(o).rstrip("/") for o in settings.BACKEND_CORS_ORIGINS]
+            
+            if origin in allowed_origins:
+                response.headers["Access-Control-Allow-Origin"] = origin
+            else:
+                # Fallback to first allowed or * is risky for credentials, 
+                # but for media streaming GETs it is often okay.
+                response.headers["Access-Control-Allow-Origin"] = allowed_origins[0] if allowed_origins else "*"
+
             response.headers["Access-Control-Allow-Methods"] = "GET, OPTIONS, HEAD"
             response.headers["Access-Control-Allow-Headers"] = "*"
             return response
