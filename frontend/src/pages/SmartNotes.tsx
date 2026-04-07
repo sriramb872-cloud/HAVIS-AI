@@ -41,6 +41,7 @@ const SmartNotes = () => {
 
     setLoading(true);
     try {
+      console.log("Smart Notes: Analyzing content...");
       const response = await aiApi.assistant("smart-notes", notes, file);
       
       if (response.status === "error") {
@@ -50,8 +51,13 @@ const SmartNotes = () => {
       setResults(response.data);
       toast.success("Study insights generated!");
     } catch (e: any) {
-      console.error("Smart Notes Error:", e);
-      toast.error(e.message || "AI Service is temporarily busy. Please try again.");
+      console.error("Smart Notes [404/API Error]:", e);
+      // Ensure we display a useful message even if the API just returns a raw 404
+      const errorMessage = e.message?.includes("404") || e.message?.includes("Not Found")
+        ? "API endpoint not found (404). Please check your VITE_API_URL configuration."
+        : (e.message || "AI Service is temporarily busy. Please try again.");
+        
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }

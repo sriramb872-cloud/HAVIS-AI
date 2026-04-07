@@ -1,10 +1,13 @@
-export const API_HOST_URL = import.meta.env.VITE_API_URL;
+export const API_HOST_URL = import.meta.env.VITE_API_URL?.replace(/\/+$/, "");
 
 if (!API_HOST_URL) {
   throw new Error("VITE_API_URL is not set");
 }
 
-const API_BASE_URL = `${API_HOST_URL}/api/v1`;
+// Phase 4: Smart Prefixing — Avoid double /api/v1 if already in the environment variable
+const API_BASE_URL = API_HOST_URL.endsWith("/api/v1") 
+  ? API_HOST_URL 
+  : `${API_HOST_URL}/api/v1`;
 import { supabase } from "@/integrations/supabase/client";
 
 export const apiClient = {
