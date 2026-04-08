@@ -52,10 +52,15 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Standard Middlewares
+# Standard Middlewares - Phase 8: Production CORS Fix
+origins = [
+    "http://localhost:5173",
+    "https://havis-ai.vercel.app",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[str(origin).rstrip("/") for origin in settings.BACKEND_CORS_ORIGINS],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
