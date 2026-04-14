@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root, .theme-girls {
+    --font-heading: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Silk theme (creamy, warm off-white background) */
+    --background: 40 20% 97%;
+    --foreground: 20 15% 15%;
+
+    --card: 40 25% 99%;
+    --card-foreground: 20 15% 15%;
+
+    --popover: 40 25% 99%;
+    --popover-foreground: 20 15% 15%;
+
+    /* Girls Mode Accent (#A76D6D ~ HSL 0 25% 54%) */
+    --primary: 0 25% 54%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 15% 92%;
+    --secondary-foreground: 20 15% 25%;
+
+    --muted: 40 15% 92%;
+    --muted-foreground: 20 10% 46%;
+
+    --accent: 15 35% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 15% 90%;
+    --input: 40 15% 90%;
+    --ring: 0 25% 54%;
+
+    --radius: 0.85rem;
+
+    --sidebar-background: 0 25% 54%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 25% 54%;
+    --sidebar-accent: 0 25% 46%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 25% 46%;
+    --sidebar-ring: 0 0% 100%;
+
+    --success: 152 60% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 100%;
+    --info: 200 80% 55%;
+    --info-foreground: 0 0% 100%;
+  }
+
+  .theme-boys {
+    /* Boys Mode Accent (#D89A5B ~ HSL 30 61% 60%) */
+    --primary: 30 61% 60%;
+    --primary-foreground: 0 0% 100%;
+    
+    --accent: 20 50% 65%;
+    --accent-foreground: 0 0% 100%;
+    
+    --ring: 30 61% 60%;
+    
+    --sidebar-background: 30 61% 60%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 30 61% 60%;
+    --sidebar-accent: 30 61% 54%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 30 61% 54%;
+    --sidebar-ring: 0 0% 100%;
+  }
+
+  .theme-dark, .dark {
+    /* Pure Premium Dark Neutral & Slate Accent (#475569) */
+    --background: 220 13% 10%;
+    --foreground: 210 15% 85%;
+    
+    --card: 222 13% 13%;
+    --card-foreground: 210 15% 85%;
+    
+    --popover: 222 13% 13%;
+    --popover-foreground: 210 15% 85%;
+    
+    --primary: 215 15% 40%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 13% 17%;
+    --secondary-foreground: 210 15% 85%;
+    
+    --muted: 220 13% 17%;
+    --muted-foreground: 215 15% 65%;
+    
+    --accent: 215 15% 35%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 20%;
+    --input: 220 13% 20%;
+    --ring: 215 15% 40%;
+    
+    /* Dedicated Dark Sidebar (Deep Slate) */
+    --sidebar-background: 220 15% 8%;
+    --sidebar-foreground: 210 15% 85%;
+    --sidebar-primary: 215 15% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 15% 12%;
+    --sidebar-accent-foreground: 210 15% 95%;
+    --sidebar-border: 220 15% 14%;
+    --sidebar-ring: 215 15% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground transition-colors duration-200;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+}
+
+@layer utilities {
+  /* Default/Girls Mode Gradients */
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(0 25% 54%), hsl(15 25% 48%));
+  }
+  .gradient-accent {
+    background: linear-gradient(135deg, hsl(15 35% 60%), hsl(25 35% 55%));
+  }
+  .gradient-card {
+    background: linear-gradient(135deg, hsl(40 25% 99%), hsl(40 20% 96%));
+  }
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-primary/10 shadow-lg;
+  }
+
+  /* Boys Mode Overrides */
+  .theme-boys .gradient-primary {
+    background: linear-gradient(135deg, hsl(30 61% 60%), hsl(25 65% 55%));
+  }
+  .theme-boys .gradient-accent {
+    background: linear-gradient(135deg, hsl(30 60% 60%), hsl(20 60% 55%));
+  }
+
+  /* Dark Mode Overrides */
+  .theme-dark .gradient-primary, .dark .gradient-primary {
+    background: linear-gradient(135deg, hsl(215 15% 40%), hsl(215 15% 30%));
+  }
+  .theme-dark .gradient-accent, .dark .gradient-accent {
+    background: linear-gradient(135deg, hsl(215 15% 35%), hsl(215 15% 25%));
+  }
+  .theme-dark .gradient-card, .dark .gradient-card {
+    background: linear-gradient(135deg, hsl(222 13% 15%), hsl(222 13% 11%));
+  }
+  .theme-dark .glass-card, .dark .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-white/5 shadow-lg;
+  }
+}

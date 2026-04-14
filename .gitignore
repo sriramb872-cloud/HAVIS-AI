@@ -1,0 +1,167 @@
+# =============================================================================
+# HAVIS AI — Production .gitignore
+# Stack: Python (FastAPI) + React (Vite) + npm/pip + Vercel
+# =============================================================================
+
+
+# -----------------------------------------------------------------------------
+# Environment Variables & Secrets
+# NEVER commit API keys, credentials, or environment configs.
+# -----------------------------------------------------------------------------
+.env
+.env.*
+.env.local
+.env.development
+.env.production
+.env.staging
+*.pem
+*.key
+secrets/
+credentials/
+
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyd
+*.pyo
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+.eggs/
+site-packages/
+
+# Database files
+*.sqlite3
+*.db
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pytype/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+
+# -----------------------------------------------------------------------------
+# Node / Frontend (React + Vite)
+# -----------------------------------------------------------------------------
+node_modules/
+dist/
+build/
+.vite/
+.vite-cache/
+
+# Log files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Lock files (keep only one — do not ignore both)
+# package-lock.json  ← keep if using npm
+# yarn.lock          ← keep if using yarn
+
+# Parcel cache
+.parcel-cache/
+
+# TypeScript build output
+*.tsbuildinfo
+
+
+# -----------------------------------------------------------------------------
+# Testing & Coverage
+# -----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+*.coverage
+coverage/
+coverage.xml
+htmlcov/
+.tox/
+nosetests.xml
+test-results/
+
+
+# -----------------------------------------------------------------------------
+# Temporary & Cache Files
+# -----------------------------------------------------------------------------
+tmp/
+temp/
+.cache/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+
+# -----------------------------------------------------------------------------
+# System Files
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+
+# -----------------------------------------------------------------------------
+# IDE & Editor Files
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# -----------------------------------------------------------------------------
+# Vercel & Deployment
+# -----------------------------------------------------------------------------
+.vercel/
+.output/
+.netlify/
+
+
+# -----------------------------------------------------------------------------
+# Miscellaneous
+# -----------------------------------------------------------------------------
+*.DS_Store
+*.orig
+*.rej
+
+# Allow env template
+!.env.example
+
+# Supabase
+.supabase/
+
+# App generated files
+uploads/
+generated/
+media/

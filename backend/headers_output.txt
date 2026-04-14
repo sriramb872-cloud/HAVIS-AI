@@ -1,0 +1,5 @@
+Status: 200
+Content-Type: video/webm
+Access-Control-Allow-Origin: http://localhost:8080
+Cross-Origin-Resource-Policy: cross-origin
+Accept-Ranges: bytes
